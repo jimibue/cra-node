@@ -2,16 +2,28 @@ const router = require('express').Router();
 const {Author, Book} = require('../db')
 
 // get => '/api/authors'
-router.get('/',(req,res,next)=>{
-    console.log('-----------')
-    console.log(`yo a get => '/api/authors' request was made`)
-    console.log('-----------')
+router.get('/',async(req,res,next)=>{
+
+    // i will get authors
+    // psql request
+    try{
+       const authors = await Author.findAll({
+        include:[Book]
+       })
+       res.json(authors)
+    } catch(err){
+        next(err)
+    }
+
 })
 // get => '/api/authors/:id'
-router.get('/:id',(req,res,next)=>{
-    console.log('-----------')
-    console.log(`yo a get => '/api/authors/:id' request was made`)
-    console.log('-----------')
+router.get('/:id', async(req,res,next)=>{
+   try{
+     const author = await Author.findByPk(req.params.id)
+     res.json(author)
+   }catch(err){
+    next(err)
+   }
 })
 
 
