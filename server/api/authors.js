@@ -7,9 +7,7 @@ router.get('/',async(req,res,next)=>{
     // i will get authors
     // psql request
     try{
-       const authors = await Author.findAll({
-        include:[Book]
-       })
+       const authors = await Author.findAll()
        res.json(authors)
     } catch(err){
         next(err)
