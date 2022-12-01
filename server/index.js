@@ -3,7 +3,7 @@ const express = require('express')
 const volleyball = require('volleyball')
 const app = express()
 module.exports = app
-
+//sdf
 // Logging middleware
 app.use(volleyball)
 
@@ -33,19 +33,14 @@ app.use((req, res, next) => {
 })
 
 // Sends our index.html (the "single page" of our SPA)
+// get => /
 app.get('/', (req, res, next) => {
+  console.log('---------')
+  console.log('Yo I just got a get to / let send back index.html')
+  console.log('---------')
   res.sendFile(path.join(__dirname, '..', 'client', 'index.html'))
 })
 
-// Two temporary routes to serve up our HTML mocks
-// We'll remove these when we're done
-app.get('/mock-1', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'juke-mock-1.html'))
-})
-
-app.get('/mock-2', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'juke-mock-2.html'))
-})
 
 // Error catching endware
 app.use((err, req, res, next) => {
